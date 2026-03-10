@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnostic Online - Piano Center Lubumbashi</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <h1>PIANO CENTER</h1>
+        <p>Tournée Lubumbashi - Diagnostic de Synthétiseur</p>
+    </header>
+
+    <div class="container">
+        <div id="progress" class="progress-bar"></div>
+
+        <form id="diagnosticForm">
+            <!-- ÉTAPE 1 : Choix des catégories -->
+            <div class="step active" id="step-categories">
+                <h2>Cochez les ou la catégorie qui correspond à votre problème</h2>
+                <div class="options-grid">
+                    <label class="option-card">
+                        <input type="checkbox" name="categories" value="alimentation">
+                        <span>Problème d’alimentation</span>
+                    </label>
+                    <label class="option-card">
+                        <input type="checkbox" name="categories" value="son">
+                        <span>Problème de son</span>
+                    </label>
+                    <label class="option-card">
+                        <input type="checkbox" name="categories" value="touches">
+                        <span>Panne des touches</span>
+                    </label>
+                    <label class="option-card">
+                        <input type="checkbox" name="categories" value="diapason">
+                        <span>Problème de diapason</span>
+                    </label>
+                    <label class="option-card">
+                        <input type="checkbox" name="categories" value="affichage">
+                        <span>Problème d'affichage / Display</span>
+                    </label>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn-primary" onclick="nextStep()">Suivant</button>
+                </div>
+            </div>
+
+            <!-- LES ÉTAPES DYNAMIQUES SERONT GÉNÉRÉES OU AFFICHÉES ICI -->
+            
+            <!-- B. Alimentation -->
+            <div class="step" id="step-alimentation">
+                <h2>Problème d'alimentation</h2>
+                <div class="input-group">
+                    <label>Votre appareil s'allume-t-il ?</label>
+                    <div class="options-grid">
+                        <label class="option-card"><input type="radio" name="alim_allume" value="Oui"> <span>Oui, il s'allume</span></label>
+                        <label class="option-card"><input type="radio" name="alim_allume" value="Non"> <span>Non, il ne s'allume pas</span></label>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Est-ce que le démarrage s'exécute complètement ?</label>
+                    <div class="options-grid">
+                        <label class="option-card"><input type="radio" name="alim_boot" value="Complet"> <span>Oui, il s'allume complètement</span></label>
+                        <label class="option-card"><input type="radio" name="alim_boot" value="Logo"> <span>Non, ça s'arrête sur le logo</span></label>
+                        <label class="option-card"><input type="radio" name="alim_boot" value="Erreur"> <span>Non, ça affiche une erreur</span></label>
+                        <label class="option-card"><input type="radio" name="alim_boot" value="Eteint"> <span>Non, ça s'éteint au relâchement</span></label>
+                        <label class="option-card"><input type="radio" name="alim_boot" value="Blanc"> <span>Non, j'ai un fond blanc</span></label>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Le Piano s'éteint-il tout seul après un certain temps ?</label>
+                    <div class="options-grid">
+                        <label class="option-card"><input type="radio" name="alim_auto_off" value="Souvent"> <span>Oui, souvent</span></label>
+                        <label class="option-card"><input type="radio" name="alim_auto_off" value="Jamais"> <span>Non, jamais</span></label>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn-secondary" onclick="prevStep()">Retour</button>
+                    <button type="button" class="btn-primary" onclick="nextStep()">Suivant</button>
+                </div>
+            </div>
+
+            <!-- C. Son -->
+            <div class="step" id="step-son">
+                <h2>Problème de son</h2>
+                <div class="input-group">
+                    <label>Le son est-il présent sur :</label>
+                    <div class="options-grid">
+                        <label class="option-card"><input type="radio" name="son_sortie" value="HP"> <span>Les haut-parleurs</span></label>
+                        <label class="option-card"><input type="radio" name="son_sortie" value="Jack"> <span>La sortie Jack / Baffle externe</span></label>
+                        <label class="option-card"><input type="radio" name="son_sortie" value="Nulle part"> <span>Nulle part</span></label>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Le curseur de volume fonctionne-t-il ?</label>
+                    <div class="options-grid">
+                        <label class="option-card"><input type="radio" name="son_volume" value="Oui"> <span>Oui, ça fonctionne normalement</span></label>
+                        <label class="option-card"><input type="radio" name="son_volume" value="Non"> <span>Non, il y a un problème</span></label>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn-secondary" onclick="prevStep()">Retour</button>
+                    <button type="button" class="btn-primary" onclick="nextStep()">Suivant</button>
+                </div>
+            </div>
+
+            <!-- D. Touches -->
+            <div class="step" id="step-touches">
+                <h2>Panne des touches</h2>
+                <div class="input-group">
+                    <label>Est-ce que toutes les touches fonctionnent ?</label>
+                    <div class="options-grid">
+                        <label class="option-card"><input type="radio" name="touches_all" value="Oui"> <span>Oui, elles fonctionnent bien</span></label>
+                        <label class="option-card"><input type="radio" name="touches_all" value="Non"> <span>Non, certaines ne fonctionnent pas</span></label>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Différence de puissance/volume entre les touches ?</label>
+                    <div class="options-grid">
+                        <label class="option-card"><input type="radio" name="touches_power" value="Oui"> <span>Oui, je rencontre ce problème</span></label>
+                        <label class="option-card"><input type="radio" name="touches_power" value="Non"> <span>Non, volume uniforme</span></label>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Problème avec les boutons de commandes ?</label>
+                    <div class="options-grid">
+                        <label class="option-card"><input type="radio" name="touches_commandes" value="Oui"> <span>Oui, certains sont défectueux</span></label>
+                        <label class="option-card"><input type="radio" name="touches_commandes" value="Non"> <span>Non, tout fonctionne</span></label>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn-secondary" onclick="prevStep()">Retour</button>
+                    <button type="button" class="btn-primary" onclick="nextStep()">Suivant</button>
+                </div>
+            </div>
+
+            <!-- E. Diapason -->
+            <div class="step" id="step-diapason">
+                <h2>Problème de diapason</h2>
+                <div class="input-group">
+                    <label>Changement brusque des gammes ?</label>
+                    <div class="options-grid">
+                        <label class="option-card"><input type="radio" name="dia_changement" value="Seulement Pitch"> <span>Oui, via le pitch bend</span></label>
+                        <label class="option-card"><input type="radio" name="dia_changement" value="Seules"> <span>Oui, elles changent seules</span></label>
+                        <label class="option-card"><input type="radio" name="dia_changement" value="Non"> <span>Non, aucun problème</span></label>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn-secondary" onclick="prevStep()">Retour</button>
+                    <button type="button" class="btn-primary" onclick="nextStep()">Suivant</button>
+                </div>
+            </div>
+
+            <!-- F. Affichage -->
+            <div class="step" id="step-affichage">
+                <h2>Problème d'affichage</h2>
+                <div class="input-group">
+                    <label>Quel est le problème de display ?</label>
+                    <div class="options-grid">
+                        <label class="option-card"><input type="radio" name="display_pb" value="Casse"> <span>Display cassé</span></label>
+                        <label class="option-card"><input type="radio" name="display_pb" value="Rien"> <span>N'affiche plus rien</span></label>
+                        <label class="option-card"><input type="radio" name="display_pb" value="Flou"> <span>Données floues</span></label>
+                        <label class="option-card"><input type="radio" name="display_pb" value="Correct"> <span>Affichage correct</span></label>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn-secondary" onclick="prevStep()">Retour</button>
+                    <button type="button" class="btn-primary" onclick="nextStep()">Suivant</button>
+                </div>
+            </div>
+
+            <!-- ÉTAPE FINALE : Identification -->
+            <div class="step" id="step-identification">
+                <h2>Identification</h2>
+                <div class="input-group">
+                    <label for="nom">Nom complet</label>
+                    <input type="text" id="nom" name="nom" required placeholder="Ex: Jean Mukendi">
+                </div>
+                <div class="input-group">
+                    <label for="tel">Téléphone / WhatsApp</label>
+                    <input type="tel" id="tel" name="tel" required placeholder="+243 ...">
+                </div>
+                <div class="input-group">
+                    <label for="ville">Ville / Province</label>
+                    <input type="text" id="ville" name="ville" required placeholder="Ex: Lubumbashi / Haut-Katanga">
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn-secondary" onclick="prevStep()">Retour</button>
+                    <button type="submit" class="btn-primary">Envoyer le diagnostic</button>
+                </div>
+            </div>
+
+            <!-- Succès -->
+            <div class="step" id="step-success">
+                <div style="text-align: center; padding: 40px 0;">
+                    <h2 style="color: var(--success);">Merci !</h2>
+                    <p>Votre diagnostic a bien été envoyé. L'équipe Piano Center reviendra vers vous rapidement.</p>
+                    <button type="button" class="btn-secondary" style="margin-top: 20px;" onclick="location.reload()">Nouveau diagnostic</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="js/form.js"></script>
+</body>
+</html>
