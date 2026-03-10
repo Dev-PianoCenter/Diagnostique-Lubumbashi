@@ -38,21 +38,21 @@ function renderResponses() {
         return;
     }
 
-    // Mapping des libellés pour un affichage propre
+    // Mapping des libellés avec le texte EXACT du formulaire
     const labels = {
-        alim_allume: "S'allume-t-il ?",
-        alim_auto_off: "S'éteint tout seul ?",
-        son_sortie: "Présence du son",
-        son_volume: "Curseur volume",
-        touches_all: "Toutes les touches",
-        touches_power: "Différence puissance",
-        touches_fonctionnent: "Touches HS",
-        touches_commandes: "Touches commandes",
-        dia_changement: "Changement gammes",
-        display_pb: "Problème display",
-        memo_boot: "Démarrage complet",
-        memo_bug: "Plante / Bug",
-        autre_description: "Description libre"
+        alim_allume: "Votre appareil s'allume-t-il ?",
+        alim_auto_off: "L'appareil s'éteint-il tout seul après un certain temps ?",
+        son_sortie: "Le son est-il présent sur :",
+        son_volume: "Est-ce que le curseur de volume fonctionne ?",
+        touches_all: "Est-ce que toutes les touches fonctionnent ?",
+        touches_power: "Certaines touches jouent-elles à une puissance de volume différente des autres ?",
+        touches_fonctionnent: "Y a-t-il des touches qui ne fonctionnent pas ?",
+        touches_commandes: "Rencontrez-vous certains problèmes avec les touches des commandes ?",
+        dia_changement: "Constatez-vous un changement brusque des gammes pendant que vous jouez ?",
+        display_pb: "Avez-vous un problème d'affichage ?",
+        memo_boot: "Est-ce que le démarrage de votre appareil s'exécute complètement ?",
+        memo_bug: "Est-ce que votre appareil plante/bug pendant son fonctionnement ?",
+        autre_description: "Décrivez votre problème en quelques mots :"
     };
 
     listContainer.innerHTML = allResponses.map(resp => {
