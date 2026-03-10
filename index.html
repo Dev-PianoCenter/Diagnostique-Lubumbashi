@@ -63,6 +63,7 @@
             <!-- B. Alimentation -->
             <div class="step" id="step-alimentation">
                 <h2>Problème d'alimentation</h2>
+                <!-- Question 1 -->
                 <div class="input-group">
                     <label>Votre appareil s'allume-t-il ?</label>
                     <div class="options-grid">
@@ -70,21 +71,12 @@
                         <label class="option-card"><input type="radio" name="alim_allume" value="Non"> <span>Non, il ne s'allume pas</span></label>
                     </div>
                 </div>
+                <!-- Question 2 -->
                 <div class="input-group">
-                    <label>Est-ce que le démarrage s'exécute complètement ?</label>
-                    <div class="options-grid">
-                        <label class="option-card"><input type="radio" name="alim_boot" value="Complet"> <span>Oui, il s'allume complètement</span></label>
-                        <label class="option-card"><input type="radio" name="alim_boot" value="Logo"> <span>Non, ça s'arrête sur le logo</span></label>
-                        <label class="option-card"><input type="radio" name="alim_boot" value="Erreur"> <span>Non, ça affiche une erreur</span></label>
-                        <label class="option-card"><input type="radio" name="alim_boot" value="Eteint"> <span>Non, ça s'éteint au relâchement</span></label>
-                        <label class="option-card"><input type="radio" name="alim_boot" value="Blanc"> <span>Non, j'ai un fond blanc</span></label>
-                    </div>
-                </div>
-                <div class="input-group">
-                    <label>Le Piano s'éteint-il tout seul après un certain temps ?</label>
+                    <label>L'appareil s'éteint-il tout seul après un certain temps ?</label>
                     <div class="options-grid">
                         <label class="option-card"><input type="radio" name="alim_auto_off" value="Souvent"> <span>Oui, souvent</span></label>
-                        <label class="option-card"><input type="radio" name="alim_auto_off" value="Jamais"> <span>Non, jamais</span></label>
+                        <label class="option-card"><input type="radio" name="alim_auto_off" value="Jamais"> <span>Non, je ne l'ai jamais constaté</span></label>
                     </div>
                 </div>
                 <div class="btn-group">
@@ -96,19 +88,21 @@
             <!-- C. Son -->
             <div class="step" id="step-son">
                 <h2>Problème de son</h2>
+                <!-- Question 1 -->
                 <div class="input-group">
                     <label>Le son est-il présent sur :</label>
                     <div class="options-grid">
-                        <label class="option-card"><input type="radio" name="son_sortie" value="HP"> <span>Les haut-parleurs</span></label>
-                        <label class="option-card"><input type="radio" name="son_sortie" value="Jack"> <span>La sortie Jack / Baffle externe</span></label>
-                        <label class="option-card"><input type="radio" name="son_sortie" value="Nulle part"> <span>Nulle part</span></label>
+                        <label class="option-card"><input type="radio" name="son_sortie" value="HP"> <span>Les hauts-parleurs intégrés</span></label>
+                        <label class="option-card"><input type="radio" name="son_sortie" value="Jack"> <span>La sortie jack / baffle externe</span></label>
+                        <label class="option-card"><input type="radio" name="son_sortie" value="Nulle part"> <span>Le son ne sort nulle part</span></label>
                     </div>
                 </div>
+                <!-- Question 2 -->
                 <div class="input-group">
-                    <label>Le curseur de volume fonctionne-t-il ?</label>
+                    <label>Est-ce que le curseur de volume fonctionne ?</label>
                     <div class="options-grid">
-                        <label class="option-card"><input type="radio" name="son_volume" value="Oui"> <span>Oui, ça fonctionne normalement</span></label>
-                        <label class="option-card"><input type="radio" name="son_volume" value="Non"> <span>Non, il y a un problème</span></label>
+                        <label class="option-card"><input type="radio" name="son_volume" value="Oui"> <span>Oui, ça fonctionne quand j'augmente et que je diminue le volume</span></label>
+                        <label class="option-card"><input type="radio" name="son_volume" value="Non"> <span>Non, ça ne fonctionne pas correctement</span></label>
                     </div>
                 </div>
                 <div class="btn-group">
@@ -120,6 +114,7 @@
             <!-- D. Touches -->
             <div class="step" id="step-touches">
                 <h2>Panne des touches</h2>
+                <!-- Question 1 -->
                 <div class="input-group">
                     <label>Est-ce que toutes les touches fonctionnent ?</label>
                     <div class="options-grid">
@@ -127,18 +122,28 @@
                         <label class="option-card"><input type="radio" name="touches_all" value="Non"> <span>Non, certaines ne fonctionnent pas</span></label>
                     </div>
                 </div>
+                <!-- Question 2 -->
                 <div class="input-group">
-                    <label>Différence de puissance/volume entre les touches ?</label>
+                    <label>Certaines touches jouent-elles à une puissance de volume différente des autres ?</label>
                     <div class="options-grid">
                         <label class="option-card"><input type="radio" name="touches_power" value="Oui"> <span>Oui, je rencontre ce problème</span></label>
-                        <label class="option-card"><input type="radio" name="touches_power" value="Non"> <span>Non, volume uniforme</span></label>
+                        <label class="option-card"><input type="radio" name="touches_power" value="Non"> <span>Non, toutes les touches fonctionnent bien</span></label>
                     </div>
                 </div>
+                <!-- Question 3 -->
                 <div class="input-group">
-                    <label>Problème avec les boutons de commandes ?</label>
+                    <label>Y a-t-il des touches qui ne fonctionnent pas ?</label>
                     <div class="options-grid">
-                        <label class="option-card"><input type="radio" name="touches_commandes" value="Oui"> <span>Oui, certains sont défectueux</span></label>
-                        <label class="option-card"><input type="radio" name="touches_commandes" value="Non"> <span>Non, tout fonctionne</span></label>
+                        <label class="option-card"><input type="radio" name="touches_fonctionnent" value="Oui"> <span>Oui, il y a des touches qui ne fonctionnent pas</span></label>
+                        <label class="option-card"><input type="radio" name="touches_fonctionnent" value="Non"> <span>Non, toutes les touches fonctionnent</span></label>
+                    </div>
+                </div>
+                <!-- Question 4 -->
+                <div class="input-group">
+                    <label>Rencontrez-vous certains problèmes avec les touches des commandes ?</label>
+                    <div class="options-grid">
+                        <label class="option-card"><input type="radio" name="touches_commandes" value="Oui"> <span>Oui, certains boutons ne fonctionnent pas</span></label>
+                        <label class="option-card"><input type="radio" name="touches_commandes" value="Non"> <span>Non, tous mes boutons de commande fonctionnent bien</span></label>
                     </div>
                 </div>
                 <div class="btn-group">
@@ -151,11 +156,11 @@
             <div class="step" id="step-diapason">
                 <h2>Problème de diapason</h2>
                 <div class="input-group">
-                    <label>Changement brusque des gammes ?</label>
+                    <label>Constatez-vous un changement brusque des gammes pendant que vous jouez ?</label>
                     <div class="options-grid">
-                        <label class="option-card"><input type="radio" name="dia_changement" value="Seulement Pitch"> <span>Oui, via le pitch bend</span></label>
-                        <label class="option-card"><input type="radio" name="dia_changement" value="Seules"> <span>Oui, elles changent seules</span></label>
-                        <label class="option-card"><input type="radio" name="dia_changement" value="Non"> <span>Non, aucun problème</span></label>
+                        <label class="option-card"><input type="radio" name="dia_changement" value="Seulement Pitch"> <span>Oui, les gammes changent d'elles-mêmes</span></label>
+                        <label class="option-card"><input type="radio" name="dia_changement" value="Seules"> <span>Oui, mais seulement quand je touche le pitch bend</span></label>
+                        <label class="option-card"><input type="radio" name="dia_changement" value="Non"> <span>Non, je ne rencontre pas ce problème</span></label>
                     </div>
                 </div>
                 <div class="btn-group">
@@ -168,12 +173,12 @@
             <div class="step" id="step-affichage">
                 <h2>Problème d'affichage</h2>
                 <div class="input-group">
-                    <label>Quel est le problème de display ?</label>
+                    <label>Avez-vous un problème d'affichage ?</label>
                     <div class="options-grid">
-                        <label class="option-card"><input type="radio" name="display_pb" value="Casse"> <span>Display cassé</span></label>
-                        <label class="option-card"><input type="radio" name="display_pb" value="Rien"> <span>N'affiche plus rien</span></label>
-                        <label class="option-card"><input type="radio" name="display_pb" value="Flou"> <span>Données floues</span></label>
-                        <label class="option-card"><input type="radio" name="display_pb" value="Correct"> <span>Affichage correct</span></label>
+                        <label class="option-card"><input type="radio" name="display_pb" value="Casse"> <span>Oui, mon display est cassé</span></label>
+                        <label class="option-card"><input type="radio" name="display_pb" value="Rien"> <span>Oui, mon display n'affiche plus les données</span></label>
+                        <label class="option-card"><input type="radio" name="display_pb" value="Flou"> <span>Oui, les données apparaissent floues</span></label>
+                        <label class="option-card"><input type="radio" name="display_pb" value="Correct"> <span>Non, l'affichage est correct</span></label>
                     </div>
                 </div>
                 <div class="btn-group">
@@ -185,21 +190,23 @@
             <!-- G. Mémoire -->
             <div class="step" id="step-memoire">
                 <h2>Mémoire et fonctionnement</h2>
+                <!-- Question 1 -->
                 <div class="input-group">
                     <label>Est-ce que le démarrage de votre appareil s'exécute complètement ?</label>
                     <div class="options-grid">
                         <label class="option-card"><input type="radio" name="memo_boot" value="Complet"> <span>Oui, il s'allume complètement</span></label>
                         <label class="option-card"><input type="radio" name="memo_boot" value="Logo"> <span>Non, ça s'arrête sur le logo</span></label>
-                        <label class="option-card"><input type="radio" name="memo_boot" value="Erreur"> <span>Non, ça affiche une erreur</span></label>
-                        <label class="option-card"><input type="radio" name="memo_boot" value="Eteint"> <span>Non, ça s'éteint au relâchement</span></label>
-                        <label class="option-card"><input type="radio" name="memo_boot" value="Blanc"> <span>Non, j'ai un fond blanc</span></label>
+                        <label class="option-card"><input type="radio" name="memo_boot" value="Erreur"> <span>Non, ça affiche un message d'erreur</span></label>
+                        <label class="option-card"><input type="radio" name="memo_boot" value="Eteint"> <span>Non, ça s'éteint dès que j'enlève le doigt du bouton power</span></label>
+                        <label class="option-card"><input type="radio" name="memo_boot" value="Blanc"> <span>Non, j'ai un fond blanc lorsque j'allume</span></label>
                     </div>
                 </div>
+                <!-- Question 2 -->
                 <div class="input-group">
-                    <label>Est-ce que votre votre appareil plante/bug pendant son fonctionnement ?</label>
+                    <label>Est-ce que votre appareil plante/bug pendant son fonctionnement ?</label>
                     <div class="options-grid">
                         <label class="option-card"><input type="radio" name="memo_bug" value="Oui"> <span>Oui, après un moment d’utilisation</span></label>
-                        <label class="option-card"><input type="radio" name="memo_bug" value="Non"> <span>Non, il fonctionne ne plante pas</span></label>
+                        <label class="option-card"><input type="radio" name="memo_bug" value="Non"> <span>Non, il ne plante pas</span></label>
                     </div>
                 </div>
                 <div class="btn-group">

@@ -41,12 +41,12 @@ function renderResponses() {
     // Mapping des libellés pour un affichage propre
     const labels = {
         alim_allume: "S'allume-t-il ?",
-        alim_boot: "Démarrage complet ?",
         alim_auto_off: "S'éteint tout seul ?",
         son_sortie: "Présence du son",
         son_volume: "Curseur volume",
         touches_all: "Toutes les touches",
         touches_power: "Différence puissance",
+        touches_fonctionnent: "Touches HS",
         touches_commandes: "Touches commandes",
         dia_changement: "Changement gammes",
         display_pb: "Problème display",
@@ -64,9 +64,14 @@ function renderResponses() {
 
         // Groupement des réponses par catégories
         const groups = {
-            "Alimentation": { alim_allume: resp.alim_allume, alim_boot: resp.alim_boot, alim_auto_off: resp.alim_auto_off },
+            "Alimentation": { alim_allume: resp.alim_allume, alim_auto_off: resp.alim_auto_off },
             "Son": { son_sortie: resp.son_sortie, son_volume: resp.son_volume },
-            "Touches": { touches_all: resp.touches_all, touches_power: resp.touches_power, touches_commandes: resp.touches_commandes },
+            "Touches": { 
+                touches_all: resp.touches_all, 
+                touches_power: resp.touches_power, 
+                touches_fonctionnent: resp.touches_fonctionnent,
+                touches_commandes: resp.touches_commandes 
+            },
             "Diapason": { dia_changement: resp.dia_changement },
             "Affichage": { display_pb: resp.display_pb },
             "Mémoire": { memo_boot: resp.memo_boot, memo_bug: resp.memo_bug },
