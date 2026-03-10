@@ -5,18 +5,8 @@ const form = document.getElementById('diagnosticForm');
 const progressBar = document.getElementById('progress');
 
 // Gérer la sélection visuelle des cartes options
-document.querySelectorAll('.option-card').forEach(card => {
-    card.addEventListener('click', function(e) {
-        // Empêcher le comportement par défaut si on clique directement sur l'input (le label le gère déjà)
-        const input = this.querySelector('input');
-        
-        // Si on a cliqué sur la carte mais pas sur l'input lui-même
-        if (e.target !== input) {
-            input.checked = !input.checked;
-            // Déclencher manuellement l'événement change pour les radios
-            input.dispatchEvent(new Event('change', { bubbles: true }));
-        }
-        
+document.querySelectorAll('.option-card input').forEach(input => {
+    input.addEventListener('change', () => {
         updateSelectedClasses();
     });
 });
@@ -31,6 +21,9 @@ function updateSelectedClasses() {
         }
     });
 }
+
+// Initialiser les classes au chargement (pour le cas où le navigateur mémorise des choix)
+updateSelectedClasses();
 
 function updateStepsSequence() {
     // Récupérer les catégories cochées
