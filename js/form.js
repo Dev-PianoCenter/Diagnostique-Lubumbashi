@@ -6,27 +6,31 @@ const progressBar = document.getElementById('progress');
 
 // Gérer la sélection visuelle des cartes options
 document.querySelectorAll('.option-card').forEach(card => {
-    card.addEventListener('click', (e) => {
-        const input = card.querySelector('input');
+    card.addEventListener('click', function(e) {
+        // Empêcher le comportement par défaut si on clique directement sur l'input (le label le gère déjà)
+        const input = this.querySelector('input');
+        
+        // Si on a cliqué sur la carte mais pas sur l'input lui-même
         if (e.target !== input) {
             input.checked = !input.checked;
+            // Déclencher manuellement l'événement change pour les radios
+            input.dispatchEvent(new Event('change', { bubbles: true }));
         }
         
-        // Gérer la classe 'selected' pour les radios
-        if (input.type === 'radio') {
-            const name = input.name;
-            document.querySelectorAll(`input[name="${name}"]`).forEach(i => {
-                i.closest('.option-card').classList.remove('selected');
-            });
-        }
-        
+        updateSelectedClasses();
+    });
+});
+
+function updateSelectedClasses() {
+    document.querySelectorAll('.option-card').forEach(card => {
+        const input = card.querySelector('input');
         if (input.checked) {
             card.classList.add('selected');
         } else {
             card.classList.remove('selected');
         }
     });
-});
+}
 
 function updateStepsSequence() {
     // Récupérer les catégories cochées
