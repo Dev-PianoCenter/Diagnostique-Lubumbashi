@@ -55,6 +55,22 @@ function renderResponses() {
         autre_description: "Décrivez votre problème en quelques mots :"
     };
 
+    // Mapping des réponses avec le texte EXACT du formulaire pour ne pas résumer
+    const valueLabels = {
+        alim_allume: { "Oui": "Oui, il s'allume", "Non": "Non, il ne s'allume pas" },
+        alim_auto_off: { "Souvent": "Oui, souvent", "Jamais": "Non, je ne l'ai jamais constaté" },
+        son_sortie: { "HP": "Les hauts-parleurs intégrés", "Jack": "La sortie jack / baffle externe", "Nulle part": "Le son ne sort nulle part" },
+        son_volume: { "Oui": "Oui, ça fonctionne quand j'augmente et que je diminue le volume", "Non": "Non, ça ne fonctionne pas correctement" },
+        touches_all: { "Oui": "Oui, elles fonctionnent bien", "Non": "Non, certaines ne fonctionnent pas" },
+        touches_power: { "Oui": "Oui, je rencontre ce problème", "Non": "Non, toutes les touches fonctionnent bien" },
+        touches_fonctionnent: { "Oui": "Oui, il y a des touches qui ne fonctionnent pas", "Non": "Non, toutes les touches fonctionnent" },
+        touches_commandes: { "Oui": "Oui, certains boutons ne fonctionnent pas", "Non": "Non, tous mes boutons de commande fonctionnent bien" },
+        dia_changement: { "Seulement Pitch": "Oui, les gammes changent d'elles-mêmes", "Seules": "Oui, mais seulement quand je touche le pitch bend", "Non": "Non, je ne rencontre pas ce problème" },
+        display_pb: { "Casse": "Oui, mon display est cassé", "Rien": "Oui, mon display n'affiche plus les données", "Flou": "Oui, les données apparaissent floues", "Correct": "Non, l'affichage est correct" },
+        memo_boot: { "Complet": "Oui, il s'allume complètement", "Logo": "Non, ça s'arrête sur le logo", "Erreur": "Non, ça affiche un message d'erreur", "Eteint": "Non, ça s'éteint dès que j'enlève le doigt du bouton power", "Blanc": "Non, j'ai un fond blanc lorsque j'allume" },
+        memo_bug: { "Oui": "Oui, après un moment d’utilisation", "Non": "Non, il ne plante pas" }
+    };
+
     listContainer.innerHTML = allResponses.map(resp => {
         const dateStr = new Date(resp.date).toLocaleString('fr-FR', {
             day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'
@@ -112,12 +128,15 @@ function renderResponses() {
                                         <div style="font-weight: 800; color: var(--primary); font-size: 0.75rem; margin-bottom: 8px; border-bottom: 1px solid rgba(197,160,89,0.2); padding-bottom: 4px;">
                                             ${groupName.toUpperCase()}
                                         </div>
-                                        ${activeFields.map(([key, val]) => `
-                                            <div class="detail-item" style="margin-bottom: 8px;">
-                                                <span class="detail-label" style="font-size: 0.65rem;">${labels[key]}</span>
-                                                <span class="detail-val" style="font-size: 0.85rem;">${val}</span>
-                                            </div>
-                                        `).join('')}
+                                        ${activeFields.map(([key, val]) => {
+                                            const displayVal = (valueLabels[key] && valueLabels[key][val]) ? valueLabels[key][val] : val;
+                                            return `
+                                                <div class="detail-item" style="margin-bottom: 8px;">
+                                                    <span class="detail-label" style="font-size: 0.65rem;">${labels[key]}</span>
+                                                    <span class="detail-val" style="font-size: 0.85rem;">${displayVal}</span>
+                                                </div>
+                                            `;
+                                        }).join('')}
                                     </div>
                                 `;
                             }).join('')}
