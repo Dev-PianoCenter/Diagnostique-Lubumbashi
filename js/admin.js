@@ -38,64 +38,86 @@ function renderResponses() {
         return;
     }
 
+    // Mapping des libellés pour un affichage propre
+    const labels = {
+        alim_allume: "S'allume-t-il ?",
+        alim_boot: "Démarrage complet ?",
+        alim_auto_off: "S'éteint tout seul ?",
+        son_sortie: "Présence du son",
+        son_volume: "Curseur volume",
+        touches_all: "Toutes les touches",
+        touches_power: "Différence puissance",
+        touches_commandes: "Touches commandes",
+        dia_changement: "Changement gammes",
+        display_pb: "Problème display",
+        memo_boot: "Démarrage complet",
+        memo_bug: "Plante / Bug",
+        autre_description: "Description libre"
+    };
+
     listContainer.innerHTML = allResponses.map(resp => {
         const dateStr = new Date(resp.date).toLocaleString('fr-FR', {
             day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'
         });
 
-        // Extraire les catégories pour les badges
         const categories = Array.isArray(resp.categories) ? resp.categories : [resp.categories].filter(Boolean);
+
+        // Groupement des réponses par catégories
+        const groups = {
+            "Alimentation": { alim_allume: resp.alim_allume, alim_boot: resp.alim_boot, alim_auto_off: resp.alim_auto_off },
+            "Son": { son_sortie: resp.son_sortie, son_volume: resp.son_volume },
+            "Touches": { touches_all: resp.touches_all, touches_power: resp.touches_power, touches_commandes: resp.touches_commandes },
+            "Diapason": { dia_changement: resp.dia_changement },
+            "Affichage": { display_pb: resp.display_pb },
+            "Mémoire": { memo_boot: resp.memo_boot, memo_bug: resp.memo_bug },
+            "Autre": { autre_description: resp.autre_description }
+        };
 
         return `
             <div class="response-card">
                 <div class="resp-header">
-                    <div>
-                        <div class="resp-name">${resp.nom || 'Anonyme'}</div>
-                        <div>
-                            ${categories.map(cat => `<span class="tag">${cat}</span>`).join('')}
-                        </div>
-                    </div>
                     <div class="resp-date">${dateStr}</div>
                 </div>
-                <div class="resp-details">
-                    <div class="detail-item">
-                        <span class="detail-label">Contact</span>
-                        <span class="detail-val">${resp.tel || '-'}</span>
+
+                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 30px;">
+                    <!-- BLOC 1 : Identification -->
+                    <div style="border-right: 1px solid var(--border); padding-right: 20px;">
+                        <h4 style="color: var(--primary); margin-bottom: 15px; font-size: 0.8rem; text-transform: uppercase;">Bloc 1 : Identification</h4>
+                        <div class="resp-name" style="font-size: 1.3rem; margin-bottom: 10px;">${resp.nom || 'Anonyme'}</div>
+                        <div class="detail-item">
+                            <span class="detail-label">Téléphone / WhatsApp</span>
+                            <span class="detail-val" style="font-size: 1.1rem;">${resp.tel || '-'}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Ville / Province</span>
+                            <span class="detail-val">${resp.ville || '-'}</span>
+                        </div>
                     </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Localisation</span>
-                        <span class="detail-val">${resp.ville || '-'}</span>
+
+                    <!-- BLOC 2 : Réponses par Catégories -->
+                    <div>
+                        <h4 style="color: var(--primary); margin-bottom: 15px; font-size: 0.8rem; text-transform: uppercase;">Bloc 2 : Détails du diagnostic</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            ${Object.entries(groups).map(([groupName, fields]) => {
+                                const activeFields = Object.entries(fields).filter(([_, val]) => val);
+                                if (activeFields.length === 0) return '';
+                                
+                                return `
+                                    <div style="background: rgba(255,255,255,0.02); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                                        <div style="font-weight: 800; color: var(--primary); font-size: 0.75rem; margin-bottom: 8px; border-bottom: 1px solid rgba(197,160,89,0.2); padding-bottom: 4px;">
+                                            ${groupName.toUpperCase()}
+                                        </div>
+                                        ${activeFields.map(([key, val]) => `
+                                            <div class="detail-item" style="margin-bottom: 8px;">
+                                                <span class="detail-label" style="font-size: 0.65rem;">${labels[key]}</span>
+                                                <span class="detail-val" style="font-size: 0.85rem;">${val}</span>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
                     </div>
-                    ${resp.alim_allume ? `
-                    <div class="detail-item">
-                        <span class="detail-label">Alimentation</span>
-                        <span class="detail-val">${resp.alim_allume} (Boot: ${resp.alim_boot})</span>
-                    </div>` : ''}
-                    ${resp.son_sortie ? `
-                    <div class="detail-item">
-                        <span class="detail-label">Son</span>
-                        <span class="detail-val">Sortie: ${resp.son_sortie}</span>
-                    </div>` : ''}
-                    ${resp.touches_all ? `
-                    <div class="detail-item">
-                        <span class="detail-label">Touches</span>
-                        <span class="detail-val">OK: ${resp.touches_all}</span>
-                    </div>` : ''}
-                    ${resp.display_pb ? `
-                    <div class="detail-item">
-                        <span class="detail-label">Display</span>
-                        <span class="detail-val">${resp.display_pb}</span>
-                    </div>` : ''}
-                    ${resp.memo_boot ? `
-                    <div class="detail-item">
-                        <span class="detail-label">Mémoire</span>
-                        <span class="detail-val">Boot: ${resp.memo_boot} | Bug: ${resp.memo_bug}</span>
-                    </div>` : ''}
-                    ${resp.autre_description ? `
-                    <div class="detail-item" style="grid-column: 1 / -1;">
-                        <span class="detail-label">Autre problème</span>
-                        <span class="detail-val">${resp.autre_description}</span>
-                    </div>` : ''}
                 </div>
             </div>
         `;
