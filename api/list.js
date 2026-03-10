@@ -1,18 +1,28 @@
-import { kv } from '@vercel/kv';
+import { createClient } from 'redis';
 
 export default async function handler(request, response) {
   if (request.method !== 'GET') {
     return response.status(405).json({ error: 'Méthode non autorisée' });
   }
 
+  const client = createClient({
+    url: process.env.REDIS_URL
+  });
+
+  client.on('error', err => console.error('Redis Client Error', err));
+
   try {
-    // On récupère toutes les réponses de la liste 'responses'
-    // LRANGE responses 0 -1 (tous les éléments)
-    const responses = await kv.lrange('responses', 0, -1);
+    await client.connect();
     
-    return response.status(200).json(responses);
+    const responses = await client.lRange('responses', 0, -1);
+    
+    // On parse chaque ligne pour retourner de vrais objets JSON
+    const parsed = responses.map(res => JSON.parse(res));
+    
+    await client.disconnect();
+    return response.status(200).json(parsed);
   } catch (error) {
-    console.error('Erreur KV:', error);
+    console.error('Erreur Redis:', error);
     return response.status(500).json({ error: 'Erreur lors de la récupération : ' + error.message });
   }
 }
