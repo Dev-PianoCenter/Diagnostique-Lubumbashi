@@ -86,6 +86,16 @@ function renderResponses() {
                         <span class="detail-label">Display</span>
                         <span class="detail-val">${resp.display_pb}</span>
                     </div>` : ''}
+                    ${resp.memo_boot ? `
+                    <div class="detail-item">
+                        <span class="detail-label">Mémoire</span>
+                        <span class="detail-val">Boot: ${resp.memo_boot} | Bug: ${resp.memo_bug}</span>
+                    </div>` : ''}
+                    ${resp.autre_description ? `
+                    <div class="detail-item" style="grid-column: 1 / -1;">
+                        <span class="detail-label">Autre problème</span>
+                        <span class="detail-val">${resp.autre_description}</span>
+                    </div>` : ''}
                 </div>
             </div>
         `;

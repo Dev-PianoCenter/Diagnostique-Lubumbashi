@@ -44,6 +44,14 @@
                         <input type="checkbox" name="categories" value="affichage">
                         <span>Problème d'affichage / Display</span>
                     </label>
+                    <label class="option-card">
+                        <input type="checkbox" name="categories" value="memoire">
+                        <span>Mémoire et fonctionnement</span>
+                    </label>
+                    <label class="option-card">
+                        <input type="checkbox" name="categories" value="autre">
+                        <span>Autre problème non listé</span>
+                    </label>
                 </div>
                 <div class="btn-group">
                     <button type="button" class="btn-primary" onclick="nextStep()">Suivant</button>
@@ -167,6 +175,45 @@
                         <label class="option-card"><input type="radio" name="display_pb" value="Flou"> <span>Données floues</span></label>
                         <label class="option-card"><input type="radio" name="display_pb" value="Correct"> <span>Affichage correct</span></label>
                     </div>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn-secondary" onclick="prevStep()">Retour</button>
+                    <button type="button" class="btn-primary" onclick="nextStep()">Suivant</button>
+                </div>
+            </div>
+
+            <!-- G. Mémoire -->
+            <div class="step" id="step-memoire">
+                <h2>Mémoire et fonctionnement</h2>
+                <div class="input-group">
+                    <label>Est-ce que le démarrage de votre appareil s'exécute complètement ?</label>
+                    <div class="options-grid">
+                        <label class="option-card"><input type="radio" name="memo_boot" value="Complet"> <span>Oui, il s'allume complètement</span></label>
+                        <label class="option-card"><input type="radio" name="memo_boot" value="Logo"> <span>Non, ça s'arrête sur le logo</span></label>
+                        <label class="option-card"><input type="radio" name="memo_boot" value="Erreur"> <span>Non, ça affiche une erreur</span></label>
+                        <label class="option-card"><input type="radio" name="memo_boot" value="Eteint"> <span>Non, ça s'éteint au relâchement</span></label>
+                        <label class="option-card"><input type="radio" name="memo_boot" value="Blanc"> <span>Non, j'ai un fond blanc</span></label>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Est-ce que votre votre appareil plante/bug pendant son fonctionnement ?</label>
+                    <div class="options-grid">
+                        <label class="option-card"><input type="radio" name="memo_bug" value="Oui"> <span>Oui, après un moment d’utilisation</span></label>
+                        <label class="option-card"><input type="radio" name="memo_bug" value="Non"> <span>Non, il fonctionne ne plante pas</span></label>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn-secondary" onclick="prevStep()">Retour</button>
+                    <button type="button" class="btn-primary" onclick="nextStep()">Suivant</button>
+                </div>
+            </div>
+
+            <!-- H. Autre -->
+            <div class="step" id="step-autre">
+                <h2>Autre problème non listé</h2>
+                <div class="input-group">
+                    <label>Décrivez votre problème en quelques mots :</label>
+                    <textarea name="autre_description" rows="5" style="width:100%; padding:14px; background:rgba(0,0,0,0.2); border:1px solid var(--border); border-radius:var(--radius); color:#fff; font-family:inherit;"></textarea>
                 </div>
                 <div class="btn-group">
                     <button type="button" class="btn-secondary" onclick="prevStep()">Retour</button>

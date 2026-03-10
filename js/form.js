@@ -41,6 +41,8 @@ function updateStepsSequence() {
     if (selectedCategories.includes('touches')) stepsSequence.push('step-touches');
     if (selectedCategories.includes('diapason')) stepsSequence.push('step-diapason');
     if (selectedCategories.includes('affichage')) stepsSequence.push('step-affichage');
+    if (selectedCategories.includes('memoire')) stepsSequence.push('step-memoire');
+    if (selectedCategories.includes('autre')) stepsSequence.push('step-autre');
     
     stepsSequence.push('step-identification');
     stepsSequence.push('step-success');
