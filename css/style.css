@@ -88,6 +88,7 @@ body {
   .container {
     width: 100%;
     max-width: 650px;
+    margin-bottom: 80px;
     background: var(--card-bg);
     padding: 40px;
     border-radius: var(--radius);
