@@ -2,7 +2,7 @@ let allResponses = [];
 let currentSort = 'date';
 let isAsc = false; // Par défaut : récent en haut (desc)
 let currentPage = 1;
-const itemsPerPage = 2;
+const itemsPerPage = 5;
 
 
 async function loadResponses() {
