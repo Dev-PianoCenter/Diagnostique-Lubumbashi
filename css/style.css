@@ -76,7 +76,6 @@ body {
     font-size: 2rem;
     font-weight: 800;
     line-height: 1.2;
-    width: 268px;
 
     /* Responsive */
     @media (max-width: 600px) {
