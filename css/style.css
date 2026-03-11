@@ -10,6 +10,7 @@
   --font-main: 'Inter', system-ui, -apple-system, sans-serif;
   --radius: 12px;
   --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  --white: #ffffff;
 }
 
 * {
@@ -28,6 +29,11 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  
+  /* Responsive */
+  @media (max-width: 600px) {
+    padding: 10px;
+  }
 }
 
 header {
@@ -35,18 +41,48 @@ header {
   margin-bottom: 40px;
   width: 100%;
   max-width: 600px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header .logo {
+  width: 150px;
+  padding-bottom: 20px;
+  
+  /* Responsive */
+  @media (max-width: 600px) {
+    width: 100px;
+    padding-bottom: 10px;
+  }
 }
 
 header h1 {
-  color: var(--primary);
-  font-size: 2.5rem;
-  font-weight: 800;
+  color: var(--white);
+  font-size: 2rem;
+  font-weight: 100;
   letter-spacing: -0.02em;
   margin-bottom: 8px;
+  
+  /* Responsive */
+  @media (max-width: 600px) {
+    font-size: 1.2rem;
+  }
 }
 
 header p {
-  color: var(--text-muted);
+  color: var(--white);
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.2;
+  width: 268px;
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    font-size: 1.2rem;
+    width: 148px;
+  }
 }
 
 .container {
@@ -237,15 +273,6 @@ input:focus {
 
 /* Responsive */
 @media (max-width: 600px) {
-  body {
-    padding: 10px;
-  }
-  
-  header h1 {
-    font-size: 1.8rem;
-  }
-
-
   h2 {
     font-size: 1.25rem;
   }
