@@ -149,14 +149,14 @@ function renderResponses() {
                     <button class="btn-delete" onclick='deleteResponse(${JSON.stringify(resp)})'>Supprimer</button>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 30px;">
+                <div class="resp-body">
                     <!-- BLOC 1 : Identification -->
-                    <div style="border-right: 1px solid var(--border); padding-right: 20px;">
-                        <h4 style="color: var(--primary); margin-bottom: 15px; font-size: 0.8rem; text-transform: uppercase;">Identification</h4>
-                        <div class="resp-name" style="font-size: 1.3rem; margin-bottom: 10px;">${resp.nom || 'Anonyme'}</div>
+                    <div class="resp-column-left">
+                        <h4 class="resp-block-title">Identification</h4>
+                        <div class="resp-name">${resp.nom || 'Anonyme'}</div>
                         <div class="detail-item">
                             <span class="detail-label">Téléphone / WhatsApp</span>
-                            <span class="detail-val" style="font-size: 1.1rem;">${resp.tel || '-'}</span>
+                            <span class="detail-val large">${resp.tel || '-'}</span>
                         </div>
                         <div class="detail-item">
                             <span class="detail-label">Ville / Province</span>
@@ -166,23 +166,23 @@ function renderResponses() {
 
                     <!-- BLOC 2 : Réponses par Catégories -->
                     <div>
-                        <h4 style="color: var(--primary); margin-bottom: 15px; font-size: 0.8rem; text-transform: uppercase;">Détails du diagnostic</h4>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <h4 class="resp-block-title">Détails du diagnostic</h4>
+                        <div class="resp-grid-details">
                             ${Object.entries(groups).map(([groupName, fields]) => {
                                 const activeFields = Object.entries(fields).filter(([_, val]) => val);
                                 if (activeFields.length === 0) return '';
                                 
                                 return `
-                                    <div style="background: rgba(255,255,255,0.02); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
-                                        <div style="font-weight: 800; color: var(--primary); font-size: 0.75rem; margin-bottom: 8px; border-bottom: 1px solid rgba(197,160,89,0.2); padding-bottom: 4px;">
+                                    <div class="resp-category-card">
+                                        <div class="resp-category-title">
                                             ${groupName}
                                         </div>
                                         ${activeFields.map(([key, val]) => {
                                             const displayVal = (valueLabels[key] && valueLabels[key][val]) ? valueLabels[key][val] : val;
                                             return `
-                                                <div class="detail-item" style="margin-bottom: 8px;">
-                                                    <span class="detail-label" style="font-size: 0.65rem;">${labels[key]}</span>
-                                                    <span class="detail-val" style="font-size: 0.85rem;">${displayVal}</span>
+                                                <div class="detail-item compact">
+                                                    <span class="detail-label small">${labels[key]}</span>
+                                                    <span class="detail-val small">${displayVal}</span>
                                                 </div>
                                             `;
                                         }).join('')}
