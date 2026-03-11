@@ -1,5 +1,7 @@
 let allResponses = [];
 let currentSort = 'date';
+let isAsc = false; // Par défaut : récent en haut (desc)
+
 
 async function loadResponses() {
     const listContainer = document.getElementById('responsesList');
@@ -12,6 +14,10 @@ async function loadResponses() {
         allResponses = await response.json();
         renderResponses();
         updateStats();
+
+        // Afficher l'indicateur de tri initial (Date ▼)
+        const btnDate = document.querySelector("button[onclick*='date']");
+        if (btnDate) btnDate.innerText = "Trier par Date ▼";
     } catch (error) {
         listContainer.innerHTML = `<div class="no-data">Erreur : ${error.message}<br>Assurez-vous que Vercel KV est configuré.</div>`;
     }
@@ -70,11 +76,30 @@ async function clearAllResponses() {
 }
 
 function sortResponses(criteria) {
-    currentSort = criteria;
+    if (currentSort === criteria) {
+        isAsc = !isAsc;
+    } else {
+        currentSort = criteria;
+        isAsc = (criteria === 'nom'); // Date -> desc (false), Nom -> asc (true)
+    }
+
+    // Mise à jour visuelle des boutons
+    const btnDate = document.querySelector("button[onclick*='date']");
+    const btnNom = document.querySelector("button[onclick*='nom']");
+    
+    if (btnDate) btnDate.innerText = `Trier par Date ${currentSort === 'date' ? (isAsc ? '▲' : '▼') : ''}`;
+    if (btnNom) btnNom.innerText = `Trier par Nom ${currentSort === 'nom' ? (isAsc ? '▲' : '▼') : ''}`;
+
     if (criteria === 'date') {
-        allResponses.sort((a, b) => new Date(b.date) - new Date(a.date));
+        allResponses.sort((a, b) => {
+            return isAsc ? new Date(a.date) - new Date(b.date) : new Date(b.date) - new Date(a.date);
+        });
     } else if (criteria === 'nom') {
-        allResponses.sort((a, b) => (a.nom || '').localeCompare(b.nom || ''));
+        allResponses.sort((a, b) => {
+            const nameA = (a.nom || '').toLowerCase();
+            const nameB = (b.nom || '').toLowerCase();
+            return isAsc ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
+        });
     }
     renderResponses();
 }
