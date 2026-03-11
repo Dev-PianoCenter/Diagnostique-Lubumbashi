@@ -152,7 +152,7 @@ function renderResponses() {
                 <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 30px;">
                     <!-- BLOC 1 : Identification -->
                     <div style="border-right: 1px solid var(--border); padding-right: 20px;">
-                        <h4 style="color: var(--primary); margin-bottom: 15px; font-size: 0.8rem; text-transform: uppercase;">Bloc 1 : Identification</h4>
+                        <h4 style="color: var(--primary); margin-bottom: 15px; font-size: 0.8rem; text-transform: uppercase;">Identification</h4>
                         <div class="resp-name" style="font-size: 1.3rem; margin-bottom: 10px;">${resp.nom || 'Anonyme'}</div>
                         <div class="detail-item">
                             <span class="detail-label">Téléphone / WhatsApp</span>
@@ -166,7 +166,7 @@ function renderResponses() {
 
                     <!-- BLOC 2 : Réponses par Catégories -->
                     <div>
-                        <h4 style="color: var(--primary); margin-bottom: 15px; font-size: 0.8rem; text-transform: uppercase;">Bloc 2 : Détails du diagnostic</h4>
+                        <h4 style="color: var(--primary); margin-bottom: 15px; font-size: 0.8rem; text-transform: uppercase;">Détails du diagnostic</h4>
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                             ${Object.entries(groups).map(([groupName, fields]) => {
                                 const activeFields = Object.entries(fields).filter(([_, val]) => val);
