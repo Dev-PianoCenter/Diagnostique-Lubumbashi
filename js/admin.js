@@ -15,8 +15,8 @@ async function loadResponses() {
         
         allResponses = await response.json();
         currentPage = 1;
-        renderResponses();
         updateStats();
+        renderResponses(); // renderResponses appelle déjà renderPagination()
 
         // Afficher l'indicateur de tri initial (Date ▼)
         const btnDate = document.querySelector("button[onclick*='date']");
@@ -28,6 +28,11 @@ async function loadResponses() {
 
 function updateStats() {
     document.getElementById('totalCount').innerText = allResponses.length;
+}
+
+function handleDelete(id) {
+    const resp = allResponses.find(r => r.id === id);
+    if (resp) deleteResponse(resp);
 }
 
 async function deleteResponse(submission) {
@@ -181,7 +186,7 @@ function renderResponses() {
             <div class="response-card">
                 <div class="resp-header">
                     <div class="resp-date">${dateStr}</div>
-                    <button class="btn-delete" onclick='deleteResponse(${JSON.stringify(resp)})'>Supprimer</button>
+                    <button class="btn-delete" onclick="handleDelete('${resp.id}')">Supprimer</button>
                 </div>
 
                 <div class="resp-body">
@@ -239,7 +244,7 @@ function renderPagination() {
     const topContainer = document.getElementById('paginationTop');
     const bottomContainer = document.getElementById('paginationBottom');
 
-    if (totalPages <= 1) {
+    if (totalPages < 1) {
         topContainer.innerHTML = '';
         bottomContainer.innerHTML = '';
         return;
