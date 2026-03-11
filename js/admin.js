@@ -1,6 +1,8 @@
 let allResponses = [];
 let currentSort = 'date';
 let isAsc = false; // Par défaut : récent en haut (desc)
+let currentPage = 1;
+const itemsPerPage = 10;
 
 
 async function loadResponses() {
@@ -12,6 +14,7 @@ async function loadResponses() {
         if (!response.ok) throw new Error("Impossible de récupérer les données");
         
         allResponses = await response.json();
+        currentPage = 1;
         renderResponses();
         updateStats();
 
@@ -101,6 +104,7 @@ function sortResponses(criteria) {
             return isAsc ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
         });
     }
+    currentPage = 1;
     renderResponses();
 }
 
@@ -108,8 +112,17 @@ function renderResponses() {
     const listContainer = document.getElementById('responsesList');
     if (allResponses.length === 0) {
         listContainer.innerHTML = '<div class="no-data">Aucun diagnostic reçu pour le moment.</div>';
+        renderPagination(); // On vide quand même la pagination
         return;
     }
+
+    const totalPages = Math.ceil(allResponses.length / itemsPerPage);
+    if (currentPage > totalPages) currentPage = totalPages;
+    if (currentPage < 1) currentPage = 1;
+
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const paginatedItems = allResponses.slice(startIndex, endIndex);
 
     // Mapping des libellés avec le texte EXACT du formulaire
     const labels = {
@@ -142,7 +155,7 @@ function renderResponses() {
         memo_bug: { "Oui": "Oui, après un moment d’utilisation", "Non": "Non, il ne plante pas" }
     };
 
-    listContainer.innerHTML = allResponses.map(resp => {
+    listContainer.innerHTML = paginatedItems.map(resp => {
         const dateStr = new Date(resp.date).toLocaleString('fr-FR', {
             day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'
         });
@@ -217,6 +230,39 @@ function renderResponses() {
             </div>
         `;
     }).join('');
+
+    renderPagination();
+}
+
+function renderPagination() {
+    const totalPages = Math.ceil(allResponses.length / itemsPerPage);
+    const topContainer = document.getElementById('paginationTop');
+    const bottomContainer = document.getElementById('paginationBottom');
+
+    if (totalPages <= 1) {
+        topContainer.innerHTML = '';
+        bottomContainer.innerHTML = '';
+        return;
+    }
+
+    const html = `
+        <button class="pagination-btn" onclick="changePage(-1)" ${currentPage === 1 ? 'disabled' : ''}>
+            &larr;
+        </button>
+        <div class="page-info">Page <b>${currentPage}</b> sur <b>${totalPages}</b></div>
+        <button class="pagination-btn" onclick="changePage(1)" ${currentPage === totalPages ? 'disabled' : ''}>
+            &rarr;
+        </button>
+    `;
+
+    topContainer.innerHTML = html;
+    bottomContainer.innerHTML = html;
+}
+
+function changePage(delta) {
+    currentPage += delta;
+    renderResponses();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // Initial load
