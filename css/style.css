@@ -2,7 +2,7 @@
   --primary: #FFC20A; /* Or Piano Center */
   --primary-hover: #b38f4a;
   --bg: #0f1115;
-  --card-bg: #41414140;
+  --card-bg: #261d33a8;
   --text: #ffffff;
   --text-muted: #94a3b8;
   --border: #ffffff1f;
@@ -104,7 +104,7 @@ body {
     max-width: 650px;
     margin-bottom: 80px;
     background: var(--card-bg);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(36px);
     padding: 40px;
     border-radius: var(--radius);
     border: 1px solid var(--border);
