@@ -1,11 +1,11 @@
 :root {
-  --primary: #c5a059; /* Or Piano Center */
+  --primary: #FFC20A; /* Or Piano Center */
   --primary-hover: #b38f4a;
   --bg: #0f1115;
   --card-bg: #8f8f8f14;
   --text: #ffffff;
   --text-muted: #94a3b8;
-  --border: #2d3139;
+  --border: #ffffff1f;
   --success: #10b981;
   --font-main: 'Inter', system-ui, -apple-system, sans-serif;
   --radius: 12px;
@@ -35,76 +35,78 @@ body {
     padding: 10px;
   }
 }
+/* Header */
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+    width: 100%;
+    max-width: 600px;
 
-header {
-  text-align: center;
-  margin-bottom: 40px;
-  width: 100%;
-  max-width: 600px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-header .logo {
-  width: 150px;
-  padding-bottom: 20px;
-  
-  /* Responsive */
-  @media (max-width: 600px) {
-    width: 100px;
-    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-}
 
-header h1 {
-  color: var(--white);
-  font-size: 2rem;
-  font-weight: 100;
-  letter-spacing: -0.02em;
-  margin-bottom: 8px;
-  
-  /* Responsive */
-  @media (max-width: 600px) {
-    font-size: 1.2rem;
+  header .logo {
+    width: 150px;
+    padding-bottom: 20px;
+    
+    /* Responsive */
+    @media (max-width: 600px) {
+      width: 100px;
+      padding-bottom: 10px;
+    }
   }
-}
 
-header p {
-  color: var(--white);
-  font-size: 2rem;
-  font-weight: 800;
-  line-height: 1.2;
-  width: 268px;
-
-  /* Responsive */
-  @media (max-width: 600px) {
-    font-size: 1.2rem;
-    width: 148px;
+  header h1 {
+    color: var(--white);
+    font-size: 2rem;
+    font-weight: 100;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    
+    /* Responsive */
+    @media (max-width: 600px) {
+      font-size: 1.2rem;
+    }
   }
-}
 
-.container {
-  width: 100%;
-  max-width: 650px;
-  background: var(--card-bg);
-  padding: 40px;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
-  position: relative;
-  overflow: hidden;
+  header p {
+    color: var(--white);
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.2;
+    width: 268px;
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      font-size: 1.2rem;
+      width: 148px;
+    }
+  }
+/* ..... */
   
-  /* Responsive */
-  @media (max-width: 600px){ 
-    max-width: 342px;
-    padding: 24px 16px;
+  .container {
+    width: 100%;
+    max-width: 650px;
+    background: var(--card-bg);
+    padding: 40px;
     border-radius: var(--radius);
-    border-left: none;
-    border-right: none;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+    
+    /* Responsive */
+    @media (max-width: 600px){ 
+      max-width: 342px;
+      padding: 24px 30px;
+      border-radius: var(--radius);
+      border-left: none;
+      border-right: none;
+    }
   }
-}
+
 
 .step {
   display: none;
@@ -122,8 +124,16 @@ header p {
 
 h2 {
   font-size: 1.5rem;
+  line-height: 1.2;
+  width:400px;
   margin-bottom: 24px;
-  color: var(--primary);
+  color: var(--white);
+  
+  /* Responsive */
+  @media (max-width: 600px) { 
+    font-size: 1.125rem;
+    width: 300px;
+  }
 }
 
 .options-grid {
@@ -142,17 +152,22 @@ h2 {
   display: flex;
   align-items: center;
   gap: 15px;
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    padding: 14px 16px;
+    font-size: 0.95rem;
+  }
 }
 
 .option-card:hover {
   background: rgba(255, 255, 255, 0.06);
-  border-color: var(--primary);
+  border-color: #ffc20aa8;
 }
 
 .option-card.selected {
   background: rgba(197, 160, 89, 0.1);
-  border-color: var(--primary);
-  box-shadow: 0 0 0 1px var(--primary);
+  box-shadow: 0 0 0 1px #ffc20aa8;
 }
 
 .option-card input[type="checkbox"],
@@ -178,8 +193,8 @@ h2 {
 }
 
 .option-card.selected::before {
-  border-color: var(--primary);
-  background-color: var(--primary);
+  border-color: #ffc20aa8;
+  background-color: #ffc20aa8;
 }
 
 /* Cas des checkboxes (carré au lieu de cercle) */
@@ -237,12 +252,20 @@ button {
 }
 
 .input-group label {
-  display: block;
+  display: flex;
   margin-bottom: 8px;
   font-size: 0.9rem;
-  color: var(--text-muted);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--white);
 }
 
+.options-grid span{
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--white);
+}
 input[type="text"],
 input[type="tel"],
 select {
@@ -273,15 +296,6 @@ input:focus {
 
 /* Responsive */
 @media (max-width: 600px) {
-  h2 {
-    font-size: 1.25rem;
-  }
-
-  .option-card {
-    padding: 14px 16px;
-    font-size: 0.95rem;
-  }
-
   /* Dashboard Admin sur Mobile */
   .admin-container {
     width: 100%;
