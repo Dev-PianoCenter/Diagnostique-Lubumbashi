@@ -56,14 +56,65 @@ function showStep(id) {
     window.scrollTo(0, 0);
 }
 
-function nextStep() {
-    if (stepsSequence[currentStepIndex] === 'step-categories') {
-        updateStepsSequence();
-        const selected = document.querySelectorAll('input[name="categories"]:checked');
+function validateStep(stepId) {
+    const step = document.getElementById(stepId);
+    if (!step) return true;
+
+    // 1. Cas particulier pour l'étape des catégories
+    if (stepId === 'step-categories') {
+        const selected = step.querySelectorAll('input[name="categories"]:checked');
         if (selected.length === 0) {
             alert("Veuillez sélectionner au moins une catégorie.");
-            return;
+            return false;
         }
+        return true;
+    }
+
+    // 2. Validation des groupes de boutons radio (input-group)
+    const radioGroups = {};
+    step.querySelectorAll('input[type="radio"]').forEach(radio => {
+        radioGroups[radio.name] = true;
+    });
+
+    for (const groupName in radioGroups) {
+        const checked = step.querySelector(`input[name="${groupName}"]:checked`);
+        if (!checked) {
+            alert("Veuillez répondre à toutes les questions de cette étape.");
+            return false;
+        }
+    }
+
+    // 3. Validation des Textareas (ex: étape 'autre')
+    const textareas = step.querySelectorAll('textarea');
+    for (const tex of textareas) {
+        if (tex.value.trim() === "") {
+            alert("Veuillez remplir le champ de description.");
+            return false;
+        }
+    }
+
+    // 4. Validation des inputs requis (ex: étape 'identification')
+    const requiredInputs = step.querySelectorAll('input[required]');
+    for (const input of requiredInputs) {
+        if (input.value.trim() === "") {
+            alert("Veuillez remplir tous les champs obligatoires.");
+            return false;
+        }
+    }
+
+    return true;
+}
+
+function nextStep() {
+    const currentStepId = stepsSequence[currentStepIndex];
+    
+    // Valider l'étape actuelle avant de passer à la suivante
+    if (!validateStep(currentStepId)) {
+        return;
+    }
+
+    if (currentStepId === 'step-categories') {
+        updateStepsSequence();
     }
     
     if (currentStepIndex < stepsSequence.length - 1) {
