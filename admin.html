@@ -103,6 +103,30 @@
             border-radius: var(--radius);
             border: 1px dashed var(--border);
         }
+        .btn-delete {
+            background: transparent;
+            color: #ff4d4d;
+            border: 1px solid #ff4d4d33;
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        .btn-delete:hover {
+            background: #ff4d4d1a;
+            border-color: #ff4d4d;
+        }
+        .btn-clear {
+            background: #ff4d4d1a;
+            color: #ff4d4d;
+            border: 1px solid #ff4d4d33;
+            margin-right: 15px;
+        }
+        .btn-clear:hover {
+            background: #ff4d4d;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
@@ -118,6 +142,7 @@
                 <span id="totalCount">0</span> Diagnostics reçus
             </div>
             <div class="controls">
+                <button class="btn-clear btn-secondary" onclick="clearAllResponses()">Tout effacer</button>
                 <button class="btn-secondary" onclick="sortResponses('date')">Trier par Date</button>
                 <button class="btn-secondary" onclick="sortResponses('nom')">Trier par Nom</button>
                 <button class="btn-primary" onclick="loadResponses()" style="flex: 0;">Actualiser</button>

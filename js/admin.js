@@ -21,6 +21,48 @@ function updateStats() {
     document.getElementById('totalCount').innerText = allResponses.length;
 }
 
+async function deleteResponse(submission) {
+    if (!confirm("Voulez-vous vraiment supprimer ce diagnostic ?")) return;
+
+    try {
+        const response = await fetch('/api/delete', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'deleteSingle', submission })
+        });
+
+        if (response.ok) {
+            loadResponses();
+        } else {
+            const err = await response.json();
+            alert("Erreur : " + err.error);
+        }
+    } catch (error) {
+        alert("Erreur lors de la suppression : " + error.message);
+    }
+}
+
+async function clearAllResponses() {
+    if (!confirm("ATTENTION : Voulez-vous vraiment supprimer TOUS les diagnostics ? Cette action est irréversible.")) return;
+
+    try {
+        const response = await fetch('/api/delete', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'clearAll' })
+        });
+
+        if (response.ok) {
+            loadResponses();
+        } else {
+            const err = await response.json();
+            alert("Erreur : " + err.error);
+        }
+    } catch (error) {
+        alert("Erreur lors de la suppression groupée : " + error.message);
+    }
+}
+
 function sortResponses(criteria) {
     currentSort = criteria;
     if (criteria === 'date') {
@@ -98,6 +140,7 @@ function renderResponses() {
             <div class="response-card">
                 <div class="resp-header">
                     <div class="resp-date">${dateStr}</div>
+                    <button class="btn-delete" onclick='deleteResponse(${JSON.stringify(resp)})'>Supprimer</button>
                 </div>
 
                 <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 30px;">
