@@ -51,7 +51,7 @@
 /* Nouvelles classes pour le contenu des cartes */
 .resp-body {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 298px 1fr;
     gap: 30px;
 }
 
