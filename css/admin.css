@@ -113,8 +113,8 @@
 .detail-label {
     color: var(--text-muted);
     display: block;
-    font-size: 0.75rem;
-    letter-spacing: 0.05em;
+    font-size: 1rem;
+    font-weight: 600;
 }
 .detail-val {
     font-weight: 600;
@@ -122,7 +122,7 @@
 
 /* Variantes de tailles */
 .detail-val.large { font-size: 1.1rem; }
-.detail-label.small { font-size: 0.65rem; }
+.detail-label.small { font-size: 0.875rem; }
 .detail-val.small { font-size: 0.85rem; }
 .detail-item.compact { margin-bottom: 8px; }
 
