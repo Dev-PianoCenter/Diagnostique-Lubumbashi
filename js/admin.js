@@ -94,7 +94,6 @@ function renderResponses() {
         son_volume: "Est-ce que le curseur de volume fonctionne ?",
         touches_all: "Est-ce que toutes les touches fonctionnent ?",
         touches_power: "Certaines touches jouent-elles à une puissance de volume différente des autres ?",
-        touches_fonctionnent: "Y a-t-il des touches qui ne fonctionnent pas ?",
         touches_commandes: "Rencontrez-vous certains problèmes avec les touches des commandes ?",
         dia_changement: "Constatez-vous un changement brusque des gammes pendant que vous jouez ?",
         display_pb: "Avez-vous un problème d'affichage ?",
@@ -111,7 +110,6 @@ function renderResponses() {
         son_volume: { "Oui": "Oui, ça fonctionne quand j'augmente et que je diminue le volume", "Non": "Non, ça ne fonctionne pas correctement" },
         touches_all: { "Oui": "Oui, elles fonctionnent bien", "Non": "Non, certaines ne fonctionnent pas" },
         touches_power: { "Oui": "Oui, je rencontre ce problème", "Non": "Non, toutes les touches fonctionnent bien" },
-        touches_fonctionnent: { "Oui": "Oui, il y a des touches qui ne fonctionnent pas", "Non": "Non, toutes les touches fonctionnent" },
         touches_commandes: { "Oui": "Oui, certains boutons ne fonctionnent pas", "Non": "Non, tous mes boutons de commande fonctionnent bien" },
         dia_changement: { "Seulement Pitch": "Oui, les gammes changent d'elles-mêmes", "Seules": "Oui, mais seulement quand je touche le pitch bend", "Non": "Non, je ne rencontre pas ce problème" },
         display_pb: { "Casse": "Oui, mon display est cassé", "Rien": "Oui, mon display n'affiche plus les données", "Flou": "Oui, les données apparaissent floues", "Correct": "Non, l'affichage est correct" },
@@ -133,7 +131,6 @@ function renderResponses() {
             "Touches": { 
                 touches_all: resp.touches_all, 
                 touches_power: resp.touches_power, 
-                touches_fonctionnent: resp.touches_fonctionnent,
                 touches_commandes: resp.touches_commandes 
             },
             "Diapason": { dia_changement: resp.dia_changement },
