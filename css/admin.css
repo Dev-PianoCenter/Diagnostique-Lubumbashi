@@ -1,5 +1,5 @@
 .admin-container {
-    max-width: 1000px;
+    max-width: 1400px;
     width: 95%;
     margin-top: 20px;
 }
@@ -51,7 +51,7 @@
 /* Nouvelles classes pour le contenu des cartes */
 .resp-body {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 3fr;
     gap: 30px;
 }
 
@@ -77,7 +77,7 @@
 
 .resp-grid-details {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
 }
 
