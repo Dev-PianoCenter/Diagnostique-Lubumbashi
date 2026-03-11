@@ -294,38 +294,4 @@ input:focus {
   width: 0%;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  /* Dashboard Admin sur Mobile */
-  .admin-container {
-    width: 100%;
-  }
 
-  .stats-bar {
-    flex-direction: column;
-    gap: 15px;
-    text-align: center;
-  }
-
-  .controls {
-    width: 100%;
-    overflow-x: auto;
-    padding-bottom: 5px;
-  }
-
-  .response-card > div[style*="grid-template-columns: 1fr 2fr"] {
-    grid-template-columns: 1fr !important;
-    gap: 20px !important;
-  }
-
-  .response-card div[style*="border-right"] {
-    border-right: none !important;
-    border-bottom: 1px solid var(--border);
-    padding-right: 0 !important;
-    padding-bottom: 20px;
-  }
-
-  .response-card div[style*="grid-template-columns: 1fr 1fr"] {
-    grid-template-columns: 1fr !important;
-  }
-}
