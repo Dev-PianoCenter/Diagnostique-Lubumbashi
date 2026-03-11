@@ -2,8 +2,8 @@
   --primary: #c5a059; /* Or Piano Center */
   --primary-hover: #b38f4a;
   --bg: #0f1115;
-  --card-bg: #1a1d23;
-  --text: #e2e8f0;
+  --card-bg: #8f8f8f14;
+  --text: #ffffff;
   --text-muted: #94a3b8;
   --border: #2d3139;
   --success: #10b981;
@@ -20,7 +20,7 @@
 
 body {
   font-family: var(--font-main);
-  background-color: var(--bg);
+  background: linear-gradient(to bottom, #000000, #240945);
   color: var(--text);
   line-height: 1.6;
   padding: 20px;
@@ -59,6 +59,15 @@ header p {
   box-shadow: var(--shadow);
   position: relative;
   overflow: hidden;
+  
+  /* Responsive */
+  @media (max-width: 600px){ 
+    max-width: 342px;
+    padding: 24px 16px;
+    border-radius: var(--radius);
+    border-left: none;
+    border-right: none;
+  }
 }
 
 .step {
@@ -236,12 +245,6 @@ input:focus {
     font-size: 1.8rem;
   }
 
-  .container {
-    padding: 24px 16px;
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
-  }
 
   h2 {
     font-size: 1.25rem;
