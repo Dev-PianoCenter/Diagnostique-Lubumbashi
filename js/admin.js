@@ -24,11 +24,14 @@ function updateStats() {
 async function deleteResponse(submission) {
     if (!confirm("Voulez-vous vraiment supprimer ce diagnostic ?")) return;
 
+    const password = prompt("Veuillez entrer le mot de passe pour confirmer la suppression :");
+    if (!password) return;
+
     try {
         const response = await fetch('/api/delete', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ action: 'deleteSingle', submission })
+            body: JSON.stringify({ action: 'deleteSingle', submission, password })
         });
 
         if (response.ok) {
@@ -45,11 +48,14 @@ async function deleteResponse(submission) {
 async function clearAllResponses() {
     if (!confirm("ATTENTION : Voulez-vous vraiment supprimer TOUS les diagnostics ? Cette action est irréversible.")) return;
 
+    const password = prompt("Veuillez entrer le mot de passe pour tout EFFACER :");
+    if (!password) return;
+
     try {
         const response = await fetch('/api/delete', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ action: 'clearAll' })
+            body: JSON.stringify({ action: 'clearAll', password })
         });
 
         if (response.ok) {

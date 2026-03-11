@@ -14,7 +14,12 @@ export default async function handler(request, response) {
   try {
     await client.connect();
     
-    const { action, submission } = request.body;
+    const { action, submission, password } = request.body;
+
+    if (password !== 'longola') {
+      await client.disconnect();
+      return response.status(401).json({ error: "Mot de passe incorrect." });
+    }
 
     if (action === 'clearAll') {
       await client.del('responses');
