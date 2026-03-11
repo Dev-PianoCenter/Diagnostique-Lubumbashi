@@ -114,7 +114,6 @@
     color: var(--text-muted);
     display: block;
     font-size: 0.75rem;
-    text-transform: uppercase;
     letter-spacing: 0.05em;
 }
 .detail-val {
