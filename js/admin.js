@@ -175,7 +175,7 @@ function renderResponses() {
                                 return `
                                     <div style="background: rgba(255,255,255,0.02); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
                                         <div style="font-weight: 800; color: var(--primary); font-size: 0.75rem; margin-bottom: 8px; border-bottom: 1px solid rgba(197,160,89,0.2); padding-bottom: 4px;">
-                                            ${groupName.toUpperCase()}
+                                            ${groupName}
                                         </div>
                                         ${activeFields.map(([key, val]) => {
                                             const displayVal = (valueLabels[key] && valueLabels[key][val]) ? valueLabels[key][val] : val;
