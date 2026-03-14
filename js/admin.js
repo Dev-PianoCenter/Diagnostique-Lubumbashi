@@ -35,6 +35,42 @@ function handleDelete(id) {
     if (resp) deleteResponse(resp);
 }
 
+async function handleUpdate(id) {
+    const resp = allResponses.find(r => r.id === id);
+    if (!resp) return;
+
+    const marque = prompt("Modifier la Marque :", resp.marque || "");
+    if (marque === null) return;
+    
+    const modele = prompt("Modifier le Modèle :", resp.modele || "");
+    if (modele === null) return;
+
+    const password = prompt("Entrez le mot de passe pour valider la modification :");
+    if (!password) return;
+
+    try {
+        const response = await fetch('/api/update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                submissionId: id, 
+                updates: { marque, modele }, 
+                password 
+            })
+        });
+
+        if (response.ok) {
+            alert("Diagnostic mis à jour avec succès !");
+            loadResponses();
+        } else {
+            const err = await response.json();
+            alert("Erreur : " + err.error);
+        }
+    } catch (error) {
+        alert("Erreur lors de la mise à jour : " + error.message);
+    }
+}
+
 async function deleteResponse(submission) {
     if (!confirm("Voulez-vous vraiment supprimer ce diagnostic ?")) return;
 
@@ -94,9 +130,11 @@ function sortResponses(criteria) {
     // Mise à jour visuelle des boutons
     const btnDate = document.querySelector("button[onclick*='date']");
     const btnNom = document.querySelector("button[onclick*='nom']");
+    const btnMarque = document.querySelector("button[onclick*='marque']");
     
     if (btnDate) btnDate.innerText = `Trier par Date ${currentSort === 'date' ? (isAsc ? '▲' : '▼') : ''}`;
     if (btnNom) btnNom.innerText = `Trier par Nom ${currentSort === 'nom' ? (isAsc ? '▲' : '▼') : ''}`;
+    if (btnMarque) btnMarque.innerText = `Trier par Marque ${currentSort === 'marque' ? (isAsc ? '▲' : '▼') : ''}`;
 
     if (criteria === 'date') {
         allResponses.sort((a, b) => {
@@ -107,6 +145,12 @@ function sortResponses(criteria) {
             const nameA = (a.nom || '').toLowerCase();
             const nameB = (b.nom || '').toLowerCase();
             return isAsc ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
+        });
+    } else if (criteria === 'marque') {
+        allResponses.sort((a, b) => {
+            const markA = (a.marque || '').toLowerCase();
+            const markB = (b.marque || '').toLowerCase();
+            return isAsc ? markA.localeCompare(markB) : markB.localeCompare(markA);
         });
     }
     currentPage = 1;
@@ -186,7 +230,10 @@ function renderResponses() {
             <div class="response-card">
                 <div class="resp-header">
                     <div class="resp-date">${dateStr}</div>
-                    <button class="btn-delete" onclick="handleDelete('${resp.id}')">Supprimer</button>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn-edit" onclick="handleUpdate('${resp.id}')">Modifier</button>
+                        <button class="btn-delete" onclick="handleDelete('${resp.id}')">Supprimer</button>
+                    </div>
                 </div>
 
                 <div class="resp-body">
@@ -201,6 +248,14 @@ function renderResponses() {
                         <div class="detail-item">
                             <span class="detail-label">Ville / Province</span>
                             <span class="detail-val">${resp.ville || '-'}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Marque</span>
+                            <span class="detail-val">${resp.marque || '-'}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Modèle</span>
+                            <span class="detail-val">${resp.modele || '-'}</span>
                         </div>
                     </div>
 

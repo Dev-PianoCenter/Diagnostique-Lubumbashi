@@ -164,6 +164,20 @@
     background: #ff4d4d1a;
     border-color: #ff4d4d;
 }
+.btn-edit {
+    background: transparent;
+    color: var(--primary);
+    border: 1px solid rgba(197, 160, 89, 0.2);
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+.btn-edit:hover {
+    background: rgba(197, 160, 89, 0.1);
+    border-color: var(--primary);
+}
 .btn-clear {
     background: #ff4d4d1a;
     color: #ff4d4d;
