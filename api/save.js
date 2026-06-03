@@ -6,7 +6,7 @@ export default async function handler(request, response) {
   }
 
   const client = createClient({
-    url: process.env.REDIS_URL
+    url: process.env.NOUVEAU_REDIS_URL || process.env.REDIS_URL
   });
 
   client.on('error', err => console.error('Redis Client Error', err));
