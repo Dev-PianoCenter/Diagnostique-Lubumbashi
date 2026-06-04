@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.html",
   "dependencies": {
-    "redis": "^4.6.10"
+    "@notionhq/client": "^5.22.0",
+    "googleapis": "^126.0.0"
   }
 }
