@@ -6,8 +6,10 @@
 }
 .stats-bar {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    gap: 14px;
     margin-bottom: 20px;
     background: var(--card-bg);
     padding: 20px;
@@ -23,6 +25,86 @@
     font-size: 2rem;
     margin-right: 10px;
 }
+
+/* ── Barre de recherche ── */
+.search-bar-wrapper {
+    flex: 1 1 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    order: 3; /* Se place en 3e ligne sous counter + controls */
+}
+
+.search-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0 14px;
+    gap: 10px;
+    transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.search-bar:focus-within {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.15);
+}
+
+.search-bar svg {
+    color: var(--text-muted);
+    flex-shrink: 0;
+    transition: color 0.2s;
+}
+
+.search-bar:focus-within svg {
+    color: var(--primary);
+}
+
+.search-bar input[type="search"] {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.95rem;
+    padding: 12px 0;
+}
+
+.search-bar input[type="search"]::placeholder {
+    color: var(--text-muted);
+}
+
+/* Masquer le "x" natif du navigateur sur input[type=search] */
+.search-bar input[type="search"]::-webkit-search-cancel-button { display: none; }
+.search-bar input[type="search"]::-ms-clear { display: none; }
+
+.search-clear {
+    cursor: pointer;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    opacity: 0;
+    transition: opacity 0.2s, color 0.2s;
+    padding: 2px 4px;
+    border-radius: 50%;
+    line-height: 1;
+    user-select: none;
+}
+
+.search-clear:hover {
+    color: var(--primary);
+}
+
+.search-result-count {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    font-style: italic;
+}
+
 .controls {
     display: flex;
     gap: 10px;
@@ -194,6 +276,15 @@
     .stats-bar {
         flex-direction: column;
         gap: 15px;
+        text-align: center;
+    }
+    .search-bar-wrapper {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    .search-result-count {
         text-align: center;
     }
     .controls {

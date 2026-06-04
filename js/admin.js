@@ -1,4 +1,6 @@
 let allResponses = [];
+let filteredResponses = [];
+let searchQuery = '';
 let currentSort = 'date';
 let isAsc = false; // Par défaut : récent en haut (desc)
 let currentPage = 1;
@@ -15,8 +17,9 @@ async function loadResponses() {
         
         allResponses = await response.json();
         currentPage = 1;
+        // Réappliquer le filtre de recherche si une requête est active
+        applyFilter();
         updateStats();
-        renderResponses(); // renderResponses appelle déjà renderPagination()
 
         // Afficher l'indicateur de tri initial (Date ▼)
         const btnDate = document.querySelector("button[onclick*='date']");
@@ -28,6 +31,51 @@ async function loadResponses() {
 
 function updateStats() {
     document.getElementById('totalCount').innerText = allResponses.length;
+    const countEl = document.getElementById('searchResultCount');
+    if (searchQuery && countEl) {
+        countEl.textContent = `${filteredResponses.length} résultat${filteredResponses.length !== 1 ? 's' : ''} sur ${allResponses.length}`;
+    } else if (countEl) {
+        countEl.textContent = '';
+    }
+}
+
+// ── Recherche ──────────────────────────────────────────────
+
+function filterResponses(query) {
+    searchQuery = query.trim().toLowerCase();
+    currentPage = 1;
+    applyFilter();
+    updateStats();
+
+    // Afficher/masquer le bouton d'effacement
+    const clearBtn = document.getElementById('searchClear');
+    if (clearBtn) clearBtn.style.opacity = searchQuery ? '1' : '0';
+}
+
+function applyFilter() {
+    if (!searchQuery) {
+        filteredResponses = [...allResponses];
+    } else {
+        filteredResponses = allResponses.filter(r => {
+            const nom    = (r.nom    || '').toLowerCase();
+            const tel    = (r.tel    || '').toLowerCase();
+            const marque = (r.marque || '').toLowerCase();
+            const modele = (r.modele || '').toLowerCase();
+            const ville  = (r.ville  || '').toLowerCase();
+            return nom.includes(searchQuery)
+                || tel.includes(searchQuery)
+                || marque.includes(searchQuery)
+                || modele.includes(searchQuery)
+                || ville.includes(searchQuery);
+        });
+    }
+    renderResponses();
+}
+
+function clearSearch() {
+    const input = document.getElementById('searchInput');
+    if (input) input.value = '';
+    filterResponses('');
 }
 
 function handleDelete(id) {
@@ -154,24 +202,27 @@ function sortResponses(criteria) {
         });
     }
     currentPage = 1;
-    renderResponses();
+    applyFilter();
 }
 
 function renderResponses() {
     const listContainer = document.getElementById('responsesList');
-    if (allResponses.length === 0) {
-        listContainer.innerHTML = '<div class="no-data">Aucun diagnostic reçu pour le moment.</div>';
-        renderPagination(); // On vide quand même la pagination
+    if (filteredResponses.length === 0) {
+        const msg = searchQuery
+            ? `<div class="no-data">Aucun résultat pour "<strong>${searchQuery}</strong>".</div>`
+            : '<div class="no-data">Aucun diagnostic reçu pour le moment.</div>';
+        listContainer.innerHTML = msg;
+        renderPagination();
         return;
     }
 
-    const totalPages = Math.ceil(allResponses.length / itemsPerPage);
+    const totalPages = Math.ceil(filteredResponses.length / itemsPerPage);
     if (currentPage > totalPages) currentPage = totalPages;
     if (currentPage < 1) currentPage = 1;
 
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const paginatedItems = allResponses.slice(startIndex, endIndex);
+    const paginatedItems = filteredResponses.slice(startIndex, endIndex);
 
     // Mapping des libellés avec le texte EXACT du formulaire
     const labels = {
@@ -295,7 +346,7 @@ function renderResponses() {
 }
 
 function renderPagination() {
-    const totalPages = Math.ceil(allResponses.length / itemsPerPage);
+    const totalPages = Math.ceil(filteredResponses.length / itemsPerPage);
     const topContainer = document.getElementById('paginationTop');
     const bottomContainer = document.getElementById('paginationBottom');
 
