@@ -2,8 +2,5 @@
   "name": "piano-center-diagnostic",
   "version": "1.0.0",
   "main": "index.html",
-  "dependencies": {
-    "@notionhq/client": "^5.22.0",
-    "googleapis": "^126.0.0"
-  }
+  "dependencies": {}
 }

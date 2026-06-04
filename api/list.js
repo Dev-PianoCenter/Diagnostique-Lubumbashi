@@ -1,4 +1,4 @@
-import { getAllSubmissions } from './_notion.js';
+import { getAllSubmissions } from './_github.js';
 
 export default async function handler(request, response) {
   if (request.method !== 'GET') {
@@ -9,7 +9,7 @@ export default async function handler(request, response) {
     const submissions = await getAllSubmissions();
     return response.status(200).json(submissions);
   } catch (error) {
-    console.error('Erreur Notion:', error);
+    console.error('Erreur GitHub:', error);
     return response.status(500).json({ error: 'Erreur lors de la récupération : ' + error.message });
   }
 }

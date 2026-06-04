@@ -1,4 +1,4 @@
-import { deleteSubmission, clearAllSubmissions } from './_notion.js';
+import { deleteSubmission, clearAllSubmissions } from './_github.js';
 
 export default async function handler(request, response) {
   if (request.method !== 'POST') {
@@ -25,7 +25,7 @@ export default async function handler(request, response) {
     return response.status(400).json({ error: "Action non valide." });
 
   } catch (error) {
-    console.error('Erreur Notion:', error);
+    console.error('Erreur GitHub:', error);
     return response.status(500).json({ error: 'Erreur lors de la suppression : ' + error.message });
   }
 }
